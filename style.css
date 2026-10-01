@@ -1,5 +1,5 @@
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Bricolage Grotesque', sans-serif;
     background-color: #4266db;
     margin: 0;
     padding: 0;
@@ -109,4 +109,3 @@ body {
         min-height: 58px;
     }
 }
-
