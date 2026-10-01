@@ -3,6 +3,7 @@ body {
     background-color: #4266db;
     margin: 0;
     padding: 0;
+    min-height: 100vh;
 }
 
 .header {
@@ -13,14 +14,99 @@ body {
 }
 
 .container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 16px;
+    width: min(760px, calc(100% - 48px));
+    margin: 48px auto;
+    padding: 32px;
+    box-sizing: border-box;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 16px 40px rgb(20 35 90 / 22%);
+}
+
+#taskInput {
+    min-width: 0;
+    padding: 18px 20px;
+    border: 2px solid #d4dced;
+    border-radius: 8px;
+    font: inherit;
+    font-size: 18px;
+    transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+#taskInput:focus {
+    border-color: #4266db;
+    outline: none;
+    box-shadow: 0 0 0 4px rgb(66 102 219 / 16%);
+}
+
+#addTaskButton {
+    padding: 0 28px;
+    border: 0;
+    border-radius: 8px;
+    background-color: #e35f38;
+    color: #fff;
+    font: inherit;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 160ms ease, transform 160ms ease;
+}
+
+#addTaskButton:hover {
+    background-color: #c94928;
+    transform: translateY(-1px);
+}
+
+#addTaskButton:focus-visible {
+    outline: 3px solid #333;
+    outline-offset: 3px;
+}
+
+#taskList {
+    grid-column: 1 / -1;
 }
 
 #clearCompletedButton {
     position: fixed;
     right: 20px;
     bottom: 20px;
+    padding: 12px 18px;
+    border: 1px solid #cbd5e8;
+    border-radius: 8px;
+    background-color: #fff;
+    color: #273b78;
+    box-shadow: 0 6px 18px rgb(20 35 90 / 18%);
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+#clearCompletedButton:hover {
+    background-color: #f0f3fa;
+    box-shadow: 0 8px 22px rgb(20 35 90 / 24%);
+    transform: translateY(-2px);
+}
+
+#clearCompletedButton:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 3px;
+}
+
+@media (max-width: 540px) {
+    .container {
+        grid-template-columns: 1fr;
+        width: calc(100% - 32px);
+        margin: 28px auto;
+        padding: 20px;
+    }
+
+    #taskInput,
+    #addTaskButton {
+        min-height: 58px;
+    }
 }
 
