@@ -7,7 +7,7 @@ const storageKey = 'todo-tasks';
 
 function saveTasks() {
 	const tasks = [...taskList.querySelectorAll('li')].map((item) => ({
-		description: item.querySelector('span').textContent,
+git 		description: item.querySelector('span').textContent,
 		completed: item.querySelector('input').checked,
 	}));
 
@@ -95,7 +95,14 @@ taskInput.addEventListener('keydown', (event) => {
 });
 
 clearCompletedButton.addEventListener('click', () => {
-	taskList.querySelectorAll('.completed').forEach((item) => item.remove());
+	const completedTasks = taskList.querySelectorAll('.completed');
+
+	if (completedTasks.length === 0) {
+		alert('Você não selecionou nenhum item!');
+		return;
+	}
+
+	completedTasks.forEach((item) => item.remove());
 	updateSelectAllTasksCheckbox();
 	saveTasks();
 });
