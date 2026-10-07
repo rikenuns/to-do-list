@@ -7,7 +7,7 @@ const storageKey = 'todo-tasks';
 
 function saveTasks() {
 	const tasks = [...taskList.querySelectorAll('li')].map((item) => ({
-git 		description: item.querySelector('span').textContent,
+		description: item.querySelector('span').textContent,
 		completed: item.querySelector('input').checked,
 	}));
 
