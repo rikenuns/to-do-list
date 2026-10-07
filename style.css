@@ -67,17 +67,82 @@ body {
 
 #taskList {
     grid-column: 1 / -1;
+    display: grid;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: 'Bricolage Grotesque', sans-serif;
+    font-size: 20px;
+}
+
+#selectAllTasksControl {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #273b78;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+#selectAllTasks {
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    accent-color: #4266db;
+    cursor: pointer;
+}
+
+#selectAllTasks:disabled {
+    cursor: not-allowed;
+}
+
+#taskList li {
+    padding: 16px 18px;
+    border: 1px solid #e1e6f0;
+    border-radius: 8px;
+    background-color: #f7f8fc;
+}
+
+#taskList label {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+}
+
+#taskList input[type="checkbox"] {
+    flex: 0 0 22px;
+    width: 22px;
+    height: 22px;
+    margin: 0;
+    accent-color: #4266db;
+    cursor: pointer;
+}
+
+#taskList input[type="checkbox"]:focus-visible {
+    outline: 3px solid rgb(66 102 219 / 35%);
+    outline-offset: 3px;
+}
+
+#taskList li.completed span {
+    color: #68738b;
+    text-decoration: line-through;
 }
 
 #clearCompletedButton {
     position: fixed;
     right: 20px;
     bottom: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
     padding: 12px 18px;
-    border: 1px solid #cbd5e8;
+    border: 1px solid #efc7c3;
     border-radius: 8px;
     background-color: #fff;
-    color: #273b78;
+    color: #9f352d;
     box-shadow: 0 6px 18px rgb(20 35 90 / 18%);
     font: inherit;
     font-weight: 700;
@@ -85,8 +150,15 @@ body {
     transition: background-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
 }
 
+#clearCompletedButton img {
+    display: block;
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
 #clearCompletedButton:hover {
-    background-color: #f0f3fa;
+    background-image: linear-gradient(135deg, #fff8f6 0%, #ffe4df 100%);
     box-shadow: 0 8px 22px rgb(20 35 90 / 24%);
     transform: translateY(-2px);
 }
