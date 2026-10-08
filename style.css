@@ -99,6 +99,10 @@ body {
 }
 
 #taskList li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
     padding: 16px 18px;
     border: 1px solid #e1e6f0;
     border-radius: 8px;
@@ -106,10 +110,16 @@ body {
 }
 
 #taskList label {
+    flex: 1;
+    min-width: 0;
     display: flex;
     align-items: center;
     gap: 14px;
     cursor: pointer;
+}
+
+#taskList .task-description {
+    overflow-wrap: anywhere;
 }
 
 #taskList input[type="checkbox"] {
@@ -126,45 +136,50 @@ body {
     outline-offset: 3px;
 }
 
-#taskList li.completed span {
+#taskList li.completed .task-description {
     color: #68738b;
     text-decoration: line-through;
 }
 
-#clearCompletedButton {
-    position: fixed;
-    right: 20px;
-    bottom: 20px;
+#taskList .task-actions {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    padding: 12px 18px;
-    border: 1px solid #efc7c3;
-    border-radius: 8px;
-    background-color: #fff;
-    color: #9f352d;
-    box-shadow: 0 6px 18px rgb(20 35 90 / 18%);
-    font: inherit;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+    gap: 8px;
 }
 
-#clearCompletedButton img {
+#taskList .task-action {
+    display: inline-grid;
+    place-items: center;
+    flex: 0 0 40px;
+    width: 40px;
+    height: 40px;
+    padding: 7px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background-color: transparent;
+    cursor: pointer;
+    transition: background-color 160ms ease, transform 160ms ease;
+}
+
+#taskList .task-action img {
     display: block;
-    width: 24px;
-    height: 24px;
+    width: 100%;
+    height: 100%;
     object-fit: contain;
 }
 
-#clearCompletedButton:hover {
-    background-image: linear-gradient(135deg, #fff8f6 0%, #ffe4df 100%);
-    box-shadow: 0 8px 22px rgb(20 35 90 / 24%);
-    transform: translateY(-2px);
+#taskList .task-edit:hover {
+    background-color: #e7edff;
+    transform: translateY(-1px);
 }
 
-#clearCompletedButton:focus-visible {
-    outline: 3px solid #fff;
+#taskList .task-delete:hover {
+    background-color: #ffe4df;
+    transform: translateY(-1px);
+}
+
+#taskList .task-action:focus-visible {
+    outline: 3px solid #4266db;
     outline-offset: 3px;
 }
 
@@ -179,5 +194,23 @@ body {
     #taskInput,
     #addTaskButton {
         min-height: 58px;
+    }
+
+    #taskList li {
+        padding: 12px;
+    }
+
+    #taskList label {
+        gap: 10px;
+    }
+
+    #taskList .task-actions {
+        gap: 4px;
+    }
+
+    #taskList .task-action {
+        flex-basis: 36px;
+        width: 36px;
+        height: 36px;
     }
 }

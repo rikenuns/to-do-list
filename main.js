@@ -2,7 +2,6 @@ const taskInput = document.querySelector('#taskInput');
 const addTaskButton = document.querySelector('#addTaskButton');
 const selectAllTasksCheckbox = document.querySelector('#selectAllTasks');
 const taskList = document.querySelector('#taskList');
-const clearCompletedButton = document.querySelector('#clearCompletedButton');
 const storageKey = 'todo-tasks';
 
 function saveTasks() {
@@ -28,16 +27,66 @@ function renderTask(description, completed = false) {
 	const label = document.createElement('label');
 	const checkbox = document.createElement('input');
 	const text = document.createElement('span');
+	const actions = document.createElement('div');
+	const editButton = document.createElement('button');
+	const editIcon = document.createElement('img');
+	const deleteButton = document.createElement('button');
+	const deleteIcon = document.createElement('img');
 
 	checkbox.type = 'checkbox';
 	checkbox.checked = completed;
+	text.className = 'task-description';
 	text.textContent = description;
 	label.append(checkbox, text);
-	item.append(label);
+
+	actions.className = 'task-actions';
+	editButton.type = 'button';
+	editButton.className = 'task-action task-edit';
+	editButton.setAttribute('aria-label', `Editar tarefa: ${description}`);
+	editIcon.src = 'img/icon-edit.png';
+	editIcon.alt = '';
+	editIcon.setAttribute('aria-hidden', 'true');
+	editButton.append(editIcon);
+
+	deleteButton.type = 'button';
+	deleteButton.className = 'task-action task-delete';
+	deleteButton.setAttribute('aria-label', `Remover tarefa: ${description}`);
+	deleteIcon.src = 'img/icons8-remove-94.png';
+	deleteIcon.alt = '';
+	deleteIcon.setAttribute('aria-hidden', 'true');
+	deleteButton.append(deleteIcon);
+
+	actions.append(editButton, deleteButton);
+	item.append(label, actions);
 	item.classList.toggle('completed', completed);
 
 	checkbox.addEventListener('change', () => {
 		item.classList.toggle('completed', checkbox.checked);
+		updateSelectAllTasksCheckbox();
+		saveTasks();
+	});
+
+	editButton.addEventListener('click', () => {
+		const updatedDescription = prompt('Edite a tarefa:', text.textContent);
+
+		if (updatedDescription === null) {
+			return;
+		}
+
+		const trimmedDescription = updatedDescription.trim();
+
+		if (!trimmedDescription) {
+			return;
+		}
+
+		text.textContent = trimmedDescription;
+		editButton.setAttribute('aria-label', `Editar tarefa: ${trimmedDescription}`);
+		deleteButton.setAttribute('aria-label', `Remover tarefa: ${trimmedDescription}`);
+		saveTasks();
+	});
+
+	deleteButton.addEventListener('click', () => {
+		item.remove();
 		updateSelectAllTasksCheckbox();
 		saveTasks();
 	});
@@ -92,19 +141,6 @@ taskInput.addEventListener('keydown', (event) => {
 	if (event.key === 'Enter') {
 		addTask();
 	}
-});
-
-clearCompletedButton.addEventListener('click', () => {
-	const completedTasks = taskList.querySelectorAll('.completed');
-
-	if (completedTasks.length === 0) {
-		alert('Você não selecionou nenhum item!');
-		return;
-	}
-
-	completedTasks.forEach((item) => item.remove());
-	updateSelectAllTasksCheckbox();
-	saveTasks();
 });
 
 loadTasks();
