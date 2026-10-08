@@ -1,7 +1,8 @@
 const taskInput = document.querySelector('#taskInput');
 const addTaskButton = document.querySelector('#addTaskButton');
 const selectAllTasksCheckbox = document.querySelector('#selectAllTasks');
-const selectAllTasksControl = document.querySelector('#selectAllTasksControl');
+const taskBulkActions = document.querySelector('#taskBulkActions');
+const deleteAllTasksButton = document.querySelector('#deleteAllTasksButton');
 const taskList = document.querySelector('#taskList');
 const storageKey = 'todo-tasks';
 
@@ -18,10 +19,11 @@ function updateSelectAllTasksCheckbox() {
 	const checkboxes = [...taskList.querySelectorAll('input[type="checkbox"]')];
 	const completedCount = checkboxes.filter((checkbox) => checkbox.checked).length;
 
-	selectAllTasksControl.hidden = checkboxes.length <= 2;
+	taskBulkActions.hidden = checkboxes.length <= 2;
 	selectAllTasksCheckbox.disabled = checkboxes.length === 0;
 	selectAllTasksCheckbox.checked = checkboxes.length > 0 && completedCount === checkboxes.length;
 	selectAllTasksCheckbox.indeterminate = completedCount > 0 && completedCount < checkboxes.length;
+	deleteAllTasksButton.hidden = !selectAllTasksCheckbox.checked;
 }
 
 function renderTask(description, completed = false) {
@@ -135,6 +137,12 @@ selectAllTasksCheckbox.addEventListener('change', () => {
 		checkbox.checked = selectAllTasksCheckbox.checked;
 		item.classList.toggle('completed', checkbox.checked);
 	});
+	updateSelectAllTasksCheckbox();
+	saveTasks();
+});
+
+deleteAllTasksButton.addEventListener('click', () => {
+	taskList.replaceChildren();
 	updateSelectAllTasksCheckbox();
 	saveTasks();
 });
