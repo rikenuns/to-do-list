@@ -72,16 +72,15 @@ body {
     margin: 0;
     padding: 0;
     list-style: none;
-    font-family: 'Bricolage Grotesque', sans-serif;
     font-size: 20px;
 }
 
 #taskBulkActions {
     grid-column: 1 / -1;
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 8px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
 }
 
 #taskBulkActions[hidden],
@@ -104,10 +103,6 @@ body {
     margin: 0;
     accent-color: #4266db;
     cursor: pointer;
-}
-
-#selectAllTasks:disabled {
-    cursor: not-allowed;
 }
 
 #deleteAllTasksButton {

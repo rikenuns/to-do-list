@@ -20,7 +20,6 @@ function updateSelectAllTasksCheckbox() {
 	const completedCount = checkboxes.filter((checkbox) => checkbox.checked).length;
 
 	taskBulkActions.hidden = checkboxes.length <= 2;
-	selectAllTasksCheckbox.disabled = checkboxes.length === 0;
 	selectAllTasksCheckbox.checked = checkboxes.length > 0 && completedCount === checkboxes.length;
 	selectAllTasksCheckbox.indeterminate = completedCount > 0 && completedCount < checkboxes.length;
 	deleteAllTasksButton.hidden = !selectAllTasksCheckbox.checked;
