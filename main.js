@@ -1,6 +1,7 @@
 const taskInput = document.querySelector('#taskInput');
 const addTaskButton = document.querySelector('#addTaskButton');
 const selectAllTasksCheckbox = document.querySelector('#selectAllTasks');
+const selectAllTasksControl = document.querySelector('#selectAllTasksControl');
 const taskList = document.querySelector('#taskList');
 const storageKey = 'todo-tasks';
 
@@ -17,6 +18,7 @@ function updateSelectAllTasksCheckbox() {
 	const checkboxes = [...taskList.querySelectorAll('input[type="checkbox"]')];
 	const completedCount = checkboxes.filter((checkbox) => checkbox.checked).length;
 
+	selectAllTasksControl.hidden = checkboxes.length <= 2;
 	selectAllTasksCheckbox.disabled = checkboxes.length === 0;
 	selectAllTasksCheckbox.checked = checkboxes.length > 0 && completedCount === checkboxes.length;
 	selectAllTasksCheckbox.indeterminate = completedCount > 0 && completedCount < checkboxes.length;

@@ -86,6 +86,10 @@ body {
     cursor: pointer;
 }
 
+#selectAllTasksControl[hidden] {
+    display: none;
+}
+
 #selectAllTasks {
     width: 20px;
     height: 20px;
